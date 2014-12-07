@@ -1,25 +1,28 @@
+var timerEventId;
+
 function countdown(interval) {
     "use strict";
     /*jslint browser:true */
 
-    var endTime, timerEventId;
+    var element, endTime;
 
     function setTimer() {
-        var element, timeLeft, hours, minutes, seconds;
-        element = document.getElementById('timerText');
+        var timeLeft, hours, minutes, seconds;
         timeLeft = new Date(endTime - new Date().getTime());
 
         if (timeLeft.getTime() < 1000) {
             element.innerHTML = "0:00";
+            clearInterval(timerEventId);
         } else {
             hours = timeLeft.getUTCHours();
             minutes = timeLeft.getUTCMinutes();
             seconds = timeLeft.getUTCSeconds();
             element.innerHTML = (hours ? hours + ":" + minutes : minutes) + ":" + seconds;
-            timerEventId = document.setTimeout(setTimer, timeLeft.getUTCMilliseconds() + 500);
         }
     }
 
+    clearInterval(timerEventId);
+    element = document.getElementById('timerText');
     endTime = new Date().getTime() + (1000 * interval) + 500;
-    setTimer();
+    timerEventId = setInterval(setTimer, 1000);
 }
