@@ -6,6 +6,14 @@ function countdown(interval) {
 
     var element, endTime;
 
+    function formatTimeSegment(segment) {
+        if (segment.toString().length < 2) {
+            segment = "0" + segment;
+        }
+
+        return segment;
+    }
+
     function setTimer() {
         var timeLeft, hours, minutes, seconds;
         timeLeft = new Date(endTime - new Date().getTime());
@@ -15,8 +23,8 @@ function countdown(interval) {
             clearInterval(timerEventId);
         } else {
             hours = timeLeft.getUTCHours();
-            minutes = timeLeft.getUTCMinutes();
-            seconds = timeLeft.getUTCSeconds();
+            minutes = formatTimeSegment(timeLeft.getUTCMinutes());
+            seconds = formatTimeSegment(timeLeft.getUTCSeconds());
             element.innerHTML = (hours ? hours + ":" + minutes : minutes) + ":" + seconds;
         }
     }
