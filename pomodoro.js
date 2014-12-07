@@ -23,6 +23,6 @@ function countdown(interval) {
 
     clearInterval(timerEventId);
     element = document.getElementById('timerText');
-    endTime = new Date().getTime() + (1000 * interval) + 500;
+    endTime = new Date().getTime() + (1000 * interval) + 1000;
     timerEventId = setInterval(setTimer, 1000);
 }
