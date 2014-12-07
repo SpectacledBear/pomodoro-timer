@@ -4,7 +4,7 @@ function countdown(interval) {
     "use strict";
     /*jslint browser:true */
 
-    var element, endTime;
+    var alarmElement, endTime, timerElement;
 
     function formatTimeSegment(segment) {
         if (segment.toString().length < 2) {
@@ -19,18 +19,22 @@ function countdown(interval) {
         timeLeft = new Date(endTime - new Date().getTime());
 
         if (timeLeft.getTime() < 1000) {
-            element.innerHTML = "0:00";
+            timerElement.innerHTML = "00:00";
             clearInterval(timerEventId);
+            alarmElement.currentTime = 0;
+            alarmElement.play();
         } else {
             hours = timeLeft.getUTCHours();
             minutes = formatTimeSegment(timeLeft.getUTCMinutes());
             seconds = formatTimeSegment(timeLeft.getUTCSeconds());
-            element.innerHTML = (hours ? hours + ":" + minutes : minutes) + ":" + seconds;
+            timerElement.innerHTML = (hours ? hours + ":" + minutes : minutes) + ":" + seconds;
         }
     }
 
     clearInterval(timerEventId);
-    element = document.getElementById('timerText');
+    alarmElement = document.getElementById('alarm');
+    alarmElement.pause();
+    timerElement = document.getElementById('timerText');
     endTime = new Date().getTime() + (1000 * interval) + 1000;
     timerEventId = setInterval(setTimer, 1000);
 }
