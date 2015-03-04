@@ -15,11 +15,13 @@ function countdown(interval) {
     }
 
     function setTimer() {
-        var timeLeft, hours, minutes, seconds;
+        var formattedTime, timeLeft, hours, minutes, seconds;
         timeLeft = new Date(endTime - new Date().getTime());
 
         if (timeLeft.getTime() < 1000) {
-            timerElement.innerHTML = "00:00";
+            formattedTime = "00:00";
+            timerElement.innerHTML = formattedTime;
+            document.title = formattedTime;
             clearInterval(timerEventId);
             alarmElement.currentTime = 0;
             alarmElement.play();
@@ -27,7 +29,9 @@ function countdown(interval) {
             hours = timeLeft.getUTCHours();
             minutes = formatTimeSegment(timeLeft.getUTCMinutes());
             seconds = formatTimeSegment(timeLeft.getUTCSeconds());
-            timerElement.innerHTML = (hours ? hours + ":" + minutes : minutes) + ":" + seconds;
+            formattedTime = (hours ? hours + ":" + minutes : minutes) + ":" + seconds;
+            timerElement.innerHTML = formattedTime;
+            document.title = formattedTime;
         }
     }
 
