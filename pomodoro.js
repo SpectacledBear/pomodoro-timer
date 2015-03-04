@@ -1,10 +1,21 @@
 var timerEventId;
 
+function publishTimer(timer) {
+    "use strict";
+    /*jslint browser:true */
+
+    var timerElement;
+
+    timerElement = document.getElementById('timerText');
+    timerElement.innerHTML = timer;
+    document.title = "Pomodoro Timer [" + timer + "]";
+}
+
 function countdown(interval) {
     "use strict";
     /*jslint browser:true */
 
-    var alarmElement, endTime, timerElement;
+    var alarmElement, endTime;
 
     function formatTimeSegment(segment) {
         if (segment.toString().length < 2) {
@@ -20,8 +31,7 @@ function countdown(interval) {
 
         if (timeLeft.getTime() < 1000) {
             formattedTime = "00:00";
-            timerElement.innerHTML = formattedTime;
-            document.title = formattedTime;
+            publishTimer(formattedTime);
             clearInterval(timerEventId);
             alarmElement.currentTime = 0;
             alarmElement.play();
@@ -30,15 +40,19 @@ function countdown(interval) {
             minutes = formatTimeSegment(timeLeft.getUTCMinutes());
             seconds = formatTimeSegment(timeLeft.getUTCSeconds());
             formattedTime = (hours ? hours + ":" + minutes : minutes) + ":" + seconds;
-            timerElement.innerHTML = formattedTime;
-            document.title = formattedTime;
+            publishTimer(formattedTime);
         }
     }
 
     clearInterval(timerEventId);
     alarmElement = document.getElementById('alarm');
     alarmElement.pause();
-    timerElement = document.getElementById('timerText');
     endTime = new Date().getTime() + (1000 * interval) + 1000;
     timerEventId = setInterval(setTimer, 1000);
 }
+
+window.onload = function () {
+    "use strict";
+
+    publishTimer("00:00");
+};
