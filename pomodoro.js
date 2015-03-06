@@ -8,7 +8,7 @@ function publishTimer(timer) {
 
     timerElement = document.getElementById('timerText');
     timerElement.innerHTML = timer;
-    document.title = "Pomodoro Timer [" + timer + "]";
+    document.title = "[" + timer + "] Pomodoro Timer";
 }
 
 function countdown(interval) {
