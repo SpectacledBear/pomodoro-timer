@@ -2,19 +2,22 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <link rel="stylesheet" href="pomodoro.css">
     </head>
     <body>
-        <div id="timer">
-            <label id="timerText"></label>
-        </div>
+        <div id="container">
+            <div id="timer">
+                <label id="timerText"></label>
+            </div>
 
-        <div id="controls">
-            <button name="work" onclick="countdown(1500);">Work</button>
-            <button name="shortBreak" onclick="countdown(300);">Short Break</button>
-            <button name="longBreak" onclick="countdown(900);">Long Break</button>
-        </div>
+            <div id="controls">
+                <button name="work" onclick="countdown(1500);">Work</button>
+                <button name="shortBreak" onclick="countdown(300);">Short Break</button>
+                <button name="longBreak" onclick="countdown(900);">Long Break</button>
+            </div>
 
-        <audio id="alarm" src="asset/alarmclock.mp3" preload="auto"></audio>
-        <script src="pomodoro.js"></script>
+            <audio id="alarm" src="asset/alarmclock.mp3" preload="auto"></audio>
+            <script src="pomodoro.js"></script>
+        </div>
     </body>
 </html>
