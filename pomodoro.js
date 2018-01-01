@@ -1,21 +1,20 @@
-var timerEventId;
+/*jslint esversion: 6 */
+let timerEventId;
 
 function publishTimer(timer) {
     "use strict";
-    /*jslint browser:true */
 
-    var timerElement;
-
-    timerElement = document.getElementById('timerText');
+    const timerElement = document.getElementById("timerText");
     timerElement.innerHTML = timer;
     document.title = "[" + timer + "] Pomodoro Timer";
 }
 
 function countdown(interval) {
     "use strict";
-    /*jslint browser:true */
 
-    var alarmElement, endTime;
+    const alarmElement = document.getElementById("alarm");
+
+    let endTime;
 
     function formatTimeSegment(segment) {
         if (segment.toString().length < 2) {
@@ -26,8 +25,8 @@ function countdown(interval) {
     }
 
     function setTimer() {
-        var formattedTime, timeLeft, hours, minutes, seconds;
-        timeLeft = new Date(endTime - new Date().getTime());
+        let formattedTime, timeLeft, hours, minutes, seconds;
+        timeLeft = new Date(endTime - Date.now());
 
         if (timeLeft.getTime() < 1000) {
             formattedTime = "00:00";
@@ -45,9 +44,8 @@ function countdown(interval) {
     }
 
     clearInterval(timerEventId);
-    alarmElement = document.getElementById('alarm');
     alarmElement.pause();
-    endTime = new Date().getTime() + (1000 * interval) + 1000;
+    endTime = Date.now() + (1000 * interval) + 1000;
     timerEventId = setInterval(setTimer, 1000);
 }
 
