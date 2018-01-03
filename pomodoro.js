@@ -9,6 +9,14 @@ function publishTimer(timer) {
     document.title = "[" + timer + "] Pomodoro Timer";
 }
 
+function stopTimer() {
+    const alarmElement = document.getElementById("alarm");
+
+    clearInterval(timerEventId);
+    alarmElement.pause();
+    publishTimer('00:00');
+};
+
 function countdown(interval) {
     "use strict";
 
@@ -22,7 +30,7 @@ function countdown(interval) {
         }
 
         return segment;
-    }
+    };
 
     function setTimer() {
         let formattedTime, timeLeft, hours, minutes, seconds;
@@ -41,16 +49,16 @@ function countdown(interval) {
             formattedTime = (hours ? hours + ":" + minutes : minutes) + ":" + seconds;
             publishTimer(formattedTime);
         }
-    }
+    };
 
     clearInterval(timerEventId);
     alarmElement.pause();
     endTime = Date.now() + (1000 * interval) + 1000;
     timerEventId = setInterval(setTimer, 1000);
-}
+};
 
 window.onload = function () {
     "use strict";
 
-    publishTimer("00:00");
+    stopTimer();
 };
