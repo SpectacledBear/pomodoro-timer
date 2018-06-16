@@ -54,7 +54,7 @@ function countdown(interval) {
     clearInterval(timerEventId);
     alarmElement.pause();
     endTime = Date.now() + (1000 * interval) + 1000;
-    timerEventId = setInterval(setTimer, 1000);
+    timerEventId = setInterval(setTimer, 100);
 };
 
 window.onload = function () {
